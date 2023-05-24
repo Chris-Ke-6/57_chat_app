@@ -4,11 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Chat Program</title>
+    <title>Chat Program Chris</title>
     <link rel="stylesheet" href="/style.css">
     <script src="/script.js"></script>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>Hello World2</h1>
+
+    <div class="wrapper">
+        <div class="header-area">
+            <h1 class="welcome"> Willkommen <b></b> </h1>
+        </div>
+        
+        <div class="chatbox-area">
+            <div id="messageHistory"></div> 
+        </div>
+       
+        <form id="message-area">
+            <textarea id="usermsg" rows="1" cols="30" ></textarea>
+            <button type="submit" onclick="sendToServer()">Senden</button>
+        </form>
+
+        <div class="footer-area">
+            <button onclick="window.location.href='settings.html'"> Nutzerliste / Namensänderung </button> 
+            <button onclick="window.location.href='login.html'"> Login </button>            
+            <input type="button" value="Beenden" onclick="window.close();">
+        </div>
+    </div> 
+
+
+
+
+
+
+
 </body>
 </html>
