@@ -20,32 +20,34 @@ const initializeWebsocketServer = async (server) => {
   await publisher.connect();
 
   const websocketServer = new WebSocket.Server({ server });
-  websocketServer.on("connection", onConnection);
+  websocketServer.on("connection", onConnection); //
   websocketServer.on("error", console.error);
   await subscriber.subscribe("newMessage", onRedisMessage); //Channel newMessage dann Funktion onRedisMessage ausführen
   await publisher.publish("newMessage", "Hello from Redis!");
 };
 
 // If a new connection is established, the onConnection function is called
-const onConnection = (ws) => {
+const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt wird
   console.log("New websocket connection");
   ws.on("close", () => onClose(ws));
-  ws.on("message", (message) => onClientMessage(ws, message));
+  ws.on("message", (message) => onClientMessage(ws, message)); //Bei neuer Mitteilung wird func onclientMessage ausgeführt
   ws.send("Hello Client!");
   //TODO!!!!!! Add the client to the clients array
-  //wenn neuen Nachricht dan onClientMessage ausführen.
+  //
 };
 
 // If a new message is received, the onClientMessage function is called
 const onClientMessage = (ws, message) => {
   console.log("Message received: " + message);
   //TODO!!!!!! Send the message to the redis channel
+
 };
 
 // If a new message from the redis channel is received, the onRedisMessage function is called
 const onRedisMessage = (message) => {
   console.log("Message received: " + message);
-  //For each client in array 
+  //clients.forEach((client) =>{
+    // client.send(message); 
   //TODO!!!!!! Send the message to all connected clients
 };
 

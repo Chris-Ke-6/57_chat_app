@@ -1,19 +1,30 @@
-const socket = new WebSocket("ws://localhost:3000");
+const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung mit den Server -> onConnection
+const msg ={}
 
+function sendToServer(){
+  msg = {
+    type: "message",
+    text: document.getElementById("usermsg").value,
+    date: Date.now
+  }
+}
+
+//Sendet Daten zum Server
 socket.addEventListener("open", (event) => {
   console.log("WebSocket connected!");
-  //const message = documetn.getElemen()
-  socket.send("Hello, server!");
+  //const message = document.getElementById("usermsg").value;
+  //socket.send(message);
+  socket.send( "Hello, server!");
+  //socket.send(JSON.stringify(msg));
 });
-//hört auf Nachrichten vom Server
 
-
+//Empfängt Nachrichten vom Server
 socket.addEventListener("message", (event) => {
   console.log(`Received message: ${event.data}`);
+  //im Index.html in die messagebox
 });
-//sendet Nachrichten 
 
-
+//Schliesst die Websocket Verbindung
 socket.addEventListener("close", (event) => {
   console.log("WebSocket closed.");
 });
