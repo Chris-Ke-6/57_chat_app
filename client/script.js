@@ -1,13 +1,4 @@
 const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung mit den Server -> onConnection
-const msg ={}
-
-function sendToServer(){
-  msg = {
-    type: "message",
-    text: document.getElementById("usermsg").value,
-    date: Date.now
-  }
-}
 
 //Sendet Daten zum Server
 socket.addEventListener("open", (event) => {
@@ -17,6 +8,10 @@ socket.addEventListener("open", (event) => {
   socket.send( "Hello, server!");
   //socket.send(JSON.stringify(msg));
 });
+
+function sendToServer() {
+  socket.send(document.getElementById("usermsg").value);
+}
 
 //Empfängt Nachrichten vom Server
 socket.addEventListener("message", (event) => {
