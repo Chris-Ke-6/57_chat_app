@@ -2,15 +2,17 @@ const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung
 
 //Sendet Daten zum Server
 socket.addEventListener("open", (event) => {
-  console.log("WebSocket connected!");
+  console.log("WebSocket connected!"); //Erscheint im Clientfenster
   //const message = document.getElementById("usermsg").value;
   //socket.send(message);
-  socket.send( "Hello, server!");
+  //socket.send( "Hello, server!");
   //socket.send(JSON.stringify(msg));
 });
 
 function sendToServer() {
-  socket.send(document.getElementById("usermsg").value);
+  let clientChat = document.getElementById("usermsg").value;
+  socket.send(clientChat);
+  console.log()
 }
 
 //Empfängt Nachrichten vom Server

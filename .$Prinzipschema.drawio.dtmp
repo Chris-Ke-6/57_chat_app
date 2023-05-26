@@ -1,0 +1,53 @@
+<mxfile host="Electron" modified="2023-05-26T21:06:21.711Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="tzeH9G4wHe7eizVPX8PV" version="21.2.8" type="device">
+  <diagram name="Seite-1" id="hpTawFlPPX_jFgcMbi0m">
+    <mxGraphModel dx="1405" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-3" value="Websocket connected" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vUBPVcn0IorBo8z8sTvL-1" target="vUBPVcn0IorBo8z8sTvL-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vUBPVcn0IorBo8z8sTvL-1" target="vUBPVcn0IorBo8z8sTvL-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-1" value="Client&amp;nbsp;&lt;br&gt;script.js" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="vUBPVcn0IorBo8z8sTvL-2" target="vUBPVcn0IorBo8z8sTvL-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="270" />
+              <mxPoint x="360" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-2" value="function sendToServer()&lt;br&gt;&quot;usermsg&quot; aus Chatfenster" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-7" value="Message on Websocket from Client received+ usermsg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vUBPVcn0IorBo8z8sTvL-4" target="vUBPVcn0IorBo8z8sTvL-6">
+          <mxGeometry x="0.0769" y="20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-4" value="const onClientMessage()&lt;br&gt;&lt;br&gt;Message on Websocket from Client received+ usermsg&lt;br&gt;&lt;br&gt;an func onRedisMessage()&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="414" y="225" width="360" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="vUBPVcn0IorBo8z8sTvL-6" target="vUBPVcn0IorBo8z8sTvL-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-6" value="const onRedisMessage()&lt;br&gt;&lt;br&gt;an alle Clients senden" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="414" y="400" width="366" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-10" value="const onConnection()&lt;br&gt;&lt;br&gt;Bei neuem Client wird die Mitteilung &quot;Hello Client&quot; gesendet&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="408" y="80" width="366" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vUBPVcn0IorBo8z8sTvL-13" value="const onRedisMessage()&lt;br&gt;&lt;br&gt;an alle Clients senden" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="414" y="550" width="366" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

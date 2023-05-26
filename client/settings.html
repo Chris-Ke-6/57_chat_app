@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Einstellungen</title>
+        <link rel="stylesheet" href="style.css">
+        <script defer src="./app.js"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div>
+                <div class = "header-area">
+                    <h1 class="welcome"> Einstellungen </h1> 
+                    <br>
+                </div>
+
+                <div class="userlist-area">
+                    <h2> Aktuelle Nutzerliste</h2>
+                </div>
+                    <div id="userlistUpdate">
+                        <button type="submit" onclick="showUserList()">Nutzerliste aktualisieren</button> 
+                     </div>
+                   
+                <div id="userbox">
+                    <!--Userliste anzeigen-->
+                    
+                </div>
+                                
+
+                <div class ="change-area">
+                    <h2>Benutzername ändern</h2>
+                    <div id="buttonlist">
+                        <form>
+                            <label for="username_old">Benutzername  alt:</label> 
+                            <input type="text" id="username_old" name="username_old"> 
+                            <br>
+                            <label for="username_new">Benutzername neu:</label>
+                            <input type="text" id="username_new" name="username_new">
+                            <br>
+                            <button type="submit" onclick="changeUserName()">Absenden</button>
+                        </form>                     
+                    </div>    
+                </div>
+
+                <div class="footer-area">
+                    <input type="button" value="Chatfenster" onclick="window.location.href='index.html'"> 
+                    <input type="button" value="Beenden" onclick="window.close()">
+                </div>
+            </div>
+        </div>   
+    </body>
+</html>
