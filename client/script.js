@@ -3,10 +3,6 @@ const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung
 //Sendet Daten zum Server
 socket.addEventListener("open", (event) => {
   console.log("WebSocket connected!"); //Erscheint im Clientfenster
-  //const message = document.getElementById("usermsg").value;
-  //socket.send(message);
-  //socket.send( "Hello, server!");
-  //socket.send(JSON.stringify(msg));
 });
 
 function sendToServer() {
@@ -18,8 +14,17 @@ function sendToServer() {
 //Empfängt Nachrichten vom Server
 socket.addEventListener("message", (event) => {
   console.log(`Received message: ${event.data}`);
+  messageChatbox(event.data);
   //im Index.html in die messagebox
 });
+
+function messageChatbox(message){
+  console.log(message);
+  let messageHistory = document.getElementById("messageHistory");
+  let newMessage = document.createElement("p");
+  newMessage.textContent = message;
+  messageHistory.appendChild(newMessage);
+}
 
 //Schliesst die Websocket Verbindung
 socket.addEventListener("close", (event) => {

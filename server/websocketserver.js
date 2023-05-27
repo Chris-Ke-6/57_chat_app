@@ -1,5 +1,6 @@
 const WebSocket = require("ws");
 const redis = require("redis");
+
 let publisher;
 
 const clients = [];
@@ -32,6 +33,7 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
   ws.on("close", () => onClose(ws));
   ws.send("Hello Client!");
   ws.on("message", (message) => onClientMessage(ws, message)); //Bei neuer Mitteilung wird func onclientMessage ausgeführt
+  clients.push(ws);
   // Wie wird der Client identifiziert?
   //TODO!!!!!! Add the client to the clients array
   //
@@ -40,7 +42,8 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
 // If a new message is received, the onClientMessage function is called
 const onClientMessage = (ws, message) => {
   console.log("Message on Websocket from Client received: " + message);
-  ws.on("message",(message) => onRedisMessage(message)); //Geht das so nicht ?!
+  //ws.send("message",(message) => onRedisMessage(message)); //08:30
+  publisher.publish("newMessage", message); //09:30
   //TODO!!!!!! Send the message to the redis channel
 };
 
@@ -56,7 +59,11 @@ const onRedisMessage = (message) => {
 // If a connection is closed, the onClose function is called
 const onClose = (ws) => {
   console.log("Websocket connection closed");
-  //TODO!!!!!! Remove the client from the clients array
-};
+  const index = clients.indexOf(ws);
+  if (index !== -1) {
+    clients.splice(index, 1)
+  };
+}  
+//TODO!!!!!! Remove the client from the clients array
 
 module.exports = { initializeWebsocketServer };
