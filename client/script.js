@@ -5,21 +5,24 @@ socket.addEventListener("open", (event) => {
   console.log("WebSocket connected!"); //Erscheint im Clientfenster
 });
 
-function sendToServer() {
+function messageToServer() {
   let clientChat = document.getElementById("usermsg").value;
   socket.send(clientChat);
   console.log()
+}
+function userToServer() {
+  let userName = document.getElementById("userInputName").value;
+  socket.send(userName);
+  console.log();
 }
 
 //Empfängt Nachrichten vom Server
 socket.addEventListener("message", (event) => {
   console.log(`Received message: ${event.data}`);
-  messageChatbox(event.data);
-  //im Index.html in die messagebox
+  messageChatbox(event.data);  //im Index.html in die messagebox
 });
 
 function messageChatbox(message){
-  console.log(message);
   let messageHistory = document.getElementById("messageHistory");
   let newMessage = document.createElement("p");
   newMessage.textContent = message;

@@ -33,8 +33,8 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
   ws.on("close", () => onClose(ws));
   ws.send("Hello Client!");
   ws.on("message", (message) => onClientMessage(ws, message)); //Bei neuer Mitteilung wird func onclientMessage ausgeführt
-  clients.push(ws);
-  // Wie wird der Client identifiziert?
+  //ws.on("username",(userName)=> onClientUsername(ws, userName));
+  //clients.push(ws);
   //TODO!!!!!! Add the client to the clients array
   //
 };
@@ -44,6 +44,15 @@ const onClientMessage = (ws, message) => {
   console.log("Message on Websocket from Client received: " + message);
   //ws.send("message",(message) => onRedisMessage(message)); //08:30
   publisher.publish("newMessage", message); //09:30
+  //TODO!!!!!! Send the message to the redis channel
+};
+
+// If a new userName is received, the onClientUsername function is called
+const onClientUsername = (ws, userName) => {
+  console.log("Username on Websocket from Client received: " + userName);
+  clients.push(userName);
+  console.log(clients);
+  //publisher.publish("newMessage", message);
   //TODO!!!!!! Send the message to the redis channel
 };
 
