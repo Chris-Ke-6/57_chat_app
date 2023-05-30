@@ -14,7 +14,21 @@
         <div class="header-area">
             <h1 class="welcome"> Willkommen <b></b> </h1>
         </div>
-        
+
+        <div class="form">        
+            <form id="userInput">
+                <div class="login-input">
+                    <label for="userInputName">Benutzername:</label>
+                    <input type="text" id="userInputName">
+                </div> 
+                                    
+                <div class="footer-area">       
+                    <input type="button" value="Anmelden" onclick="userToServer()">
+                </div>
+            </form>
+        </div>
+
+       
         <div class="chatbox-area">
             <div id="messageHistory"></div> 
         </div>

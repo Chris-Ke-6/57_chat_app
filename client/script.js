@@ -1,19 +1,22 @@
+//Startet eine Instanz auf dem Localhost 3000
 const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung mit den Server -> onConnection
 
-//Sendet Daten zum Server
+//Sendet Daten zum Server 
 socket.addEventListener("open", (event) => {
   console.log("WebSocket connected!"); //Erscheint im Clientfenster
 });
 
 function messageToServer() {
   let clientChat = document.getElementById("usermsg").value;
-  socket.send(clientChat);
-  console.log()
+  //socket.send(clientChat);
+  socket.send(JSON.stringify({ type: 'message', value: clientChat }));
+  console.log(clientChat);
 }
 function userToServer() {
   let userName = document.getElementById("userInputName").value;
-  socket.send(userName);
-  console.log();
+  //socket.send(userName);
+  socket.send(JSON.stringify({ type: 'user', value: userName }));
+  console.log(userName);
 }
 
 //Empfängt Nachrichten vom Server
@@ -35,11 +38,5 @@ socket.addEventListener("close", (event) => {
 });
 
 socket.addEventListener("error", (event) => {
-  console.error("WebSocket error:", event);
+  console.error("WebSocket error:", event); 
 });
-
-
-//Eventhandler aus Index.html
-//Senden an Backend 
-//mit http keine stehende Verbindung, darum Websockets
-// 

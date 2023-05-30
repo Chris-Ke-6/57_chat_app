@@ -32,7 +32,21 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
   console.log("New websocket connection");
   ws.on("close", () => onClose(ws));
   ws.send("Hello Client!");
-  ws.on("message", (message) => onClientMessage(ws, message)); //Bei neuer Mitteilung wird func onclientMessage ausgeführt
+  ws.on('message', (message)=> {
+    const parseMessage = JSON.parse(message);
+    const type = parseMessage.type;
+    const value = parseMessage.value;
+
+    if (type === 'message'){
+      console.log(value);
+      onClientMessage(ws,value);
+    } else if (type === 'user') {
+      console.log(value);
+      onClientUsername(ws,value);
+    }
+  })
+
+  //ws.on("message", (message) => onClientMessage(ws, message)); //Bei neuer Mitteilung wird func onclientMessage ausgeführt
   //ws.on("username",(userName)=> onClientUsername(ws, userName));
   //clients.push(ws);
   //TODO!!!!!! Add the client to the clients array
