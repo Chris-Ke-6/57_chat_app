@@ -4,13 +4,13 @@
   }
   
   body {
-    margin: 20px auto;
+    margin: 10px auto;
     font-family: "Lato";
     font-weight: 300;
   }
   
   .form {
-    padding: 15px 25px;
+    padding: 15px 10px;
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -19,10 +19,9 @@
   .chatbox-area {
     text-align: left;
     margin: 0 auto;
-    margin-bottom: 25px;
     padding: 10px;
     background: #ffffff;
-    height: 200px;
+    height: 150px;
     width: 530px;
     border: 1px solid #a7a7a7;
     overflow: auto;
@@ -34,7 +33,7 @@
     margin: 0 auto;
     padding: 10px;
     background: #fff;
-    height: 150px;
+    height: 50px;
     width: 530px;
     border: 1px solid #a7a7a7;
     overflow: auto;
@@ -42,12 +41,12 @@
   }
   
   #message-area{
-    padding: 15px 25px;
+    padding: 10px 25px;
   }
   
   .wrapper {
     margin: 0 auto;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
     background: #eeeeee;
     width: 600px;
     max-width: 100%;
@@ -65,16 +64,15 @@
   .login-input input{
     width: 100%;
   }
-  
-  
+    
   .header-area {
-    padding: 15px 25px;
+    padding: 10px 10px;
     display: block;
     text-align: center;
   }
   
   .change-area {
-    padding: 15px 25px;
+    padding: 10px 10px;
     display: block;
     text-align: center;
   }
@@ -98,7 +96,7 @@
   }
   
   .footer-area {
-    padding: 15px 25px;
+    padding: 10px 25px;
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -109,7 +107,7 @@
   }
   
   #buttonlist{
-    padding: 10px 25px;
+    padding: 10px 15px;
     display: block;
     
   }

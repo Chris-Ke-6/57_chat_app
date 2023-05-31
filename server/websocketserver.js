@@ -43,38 +43,42 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
     } else if (type === 'user') {
       console.log(value);
       onClientUsername(ws,value);
+    } else if (type === 'userchange'){
+      console.log(value);
+      onClientUserchange(ws,value);
     }
   })
-
-  //ws.on("message", (message) => onClientMessage(ws, message)); //Bei neuer Mitteilung wird func onclientMessage ausgeführt
-  //ws.on("username",(userName)=> onClientUsername(ws, userName));
-  //clients.push(ws);
-  //TODO!!!!!! Add the client to the clients array
-  //
 };
 
 // If a new message is received, the onClientMessage function is called
 const onClientMessage = (ws, message) => {
   console.log("Message on Websocket from Client received: " + message);
   //ws.send("message",(message) => onRedisMessage(message)); //08:30
-  publisher.publish("newMessage", message); //09:30
+  publisher.publish("newMessage", message);
   //TODO!!!!!! Send the message to the redis channel
 };
 
 // If a new userName is received, the onClientUsername function is called
 const onClientUsername = (ws, userName) => {
   console.log("Username on Websocket from Client received: " + userName);
-  clients.push(userName);
+  clients.push({ws,userName});
   console.log(clients);
-  //publisher.publish("newMessage", message);
-  //TODO!!!!!! Send the message to the redis channel
 };
+
+// If a Change of Username is received, the onClientUserchange is called
+const onClientUserchange = (ws, userNames) => {
+  console.log("UserChange on Websocket from Client received");
+  console.log(JSON.stringify(userNames.userNameOld + userNames.userNameNew));
+  //
+};
+
 
 // If a new message from the redis channel is received, the onRedisMessage function is called
 const onRedisMessage = (message) => {
   console.log("Message by redis received: " + message);
   clients.forEach((client) =>{
-    client.send(message);
+    client.ws.send(message);
+
   }); 
   //TODO!!!!!! Send the message to all connected clients
 };

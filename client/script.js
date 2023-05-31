@@ -12,11 +12,20 @@ function messageToServer() {
   socket.send(JSON.stringify({ type: 'message', value: clientChat }));
   console.log(clientChat);
 }
+
 function userToServer() {
   let userName = document.getElementById("userInputName").value;
   //socket.send(userName);
   socket.send(JSON.stringify({ type: 'user', value: userName }));
   console.log(userName);
+}
+
+function changeUserName() {
+  let userNameOld = document.getElementById("username_old").value;
+  let userNameNew = document.getElementById("username_new").value;
+  //socket.send(userName);
+  socket.send(JSON.stringify({ type: 'userchange', value: {userNameOld, userNameNew} }));
+  console.log(userNameOld,userNameNew);
 }
 
 //Empfängt Nachrichten vom Server
@@ -31,6 +40,8 @@ function messageChatbox(message){
   newMessage.textContent = message;
   messageHistory.appendChild(newMessage);
 }
+
+
 
 //Schliesst die Websocket Verbindung
 socket.addEventListener("close", (event) => {

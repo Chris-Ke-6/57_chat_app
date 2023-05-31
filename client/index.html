@@ -16,7 +16,7 @@
         </div>
 
         <div class="form">        
-            <form id="userInput">
+            <div id="userInput">
                 <div class="login-input">
                     <label for="userInputName">Benutzername:</label>
                     <input type="text" id="userInputName">
@@ -25,22 +25,46 @@
                 <div class="footer-area">       
                     <input type="button" value="Anmelden" onclick="userToServer()">
                 </div>
-            </form>
+            </div>
         </div>
-
        
         <div class="chatbox-area">
             <div id="messageHistory"></div> 
         </div>
        
-        <form id="message-area">
+        <div id="message-area">
             <textarea id="usermsg" rows="1" cols="30" ></textarea>
-            <button type="submit" onclick="messageToServer()">Senden</button>
-        </form>
+            <button type="button" onclick="messageToServer()">Senden</button>
+        </div>
 
-        <div class="footer-area">
-            <button onclick="window.location.href='settings.html'"> Nutzerliste / Namensänderung </button> 
-            <button onclick="window.location.href='login.html'"> Login </button>            
+        <div class="userlist-area">
+            <h3> Aktuelle Nutzerliste</h3>
+        </div>
+            <div id="userlistUpdate">
+                <button type="button" onclick="showUserList()">Nutzerliste aktualisieren</button> 
+             </div>
+           
+        <div id="userbox">
+            <!--Userliste anzeigen-->
+            
+        </div>
+
+        <div class ="change-area">
+            <h3>Benutzername ändern</h3>
+            <div id="buttonlist">
+                <form>
+                    <label for="username_old">Benutzername  alt:</label> 
+                    <input type="text" id="username_old" name="username_old"> 
+                    <br>
+                    <label for="username_new">Benutzername neu:</label>
+                    <input type="text" id="username_new" name="username_new">
+                    <br>
+                    <button type="button" onclick="changeUserName()">Absenden</button>
+                </form>                     
+            </div>    
+        </div>
+
+        <div class="footer-area">        
             <input type="button" value="Beenden" onclick="window.close();">
         </div>
     </div> 
