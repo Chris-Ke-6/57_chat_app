@@ -1,7 +1,7 @@
 //Startet eine Instanz auf dem Localhost 3000
 const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung mit den Server -> onConnection
 
-//Sendet Daten zum Server 
+//Öffnet die Sendet Daten zum Server 
 socket.addEventListener("open", (event) => {
   console.log("WebSocket connected!"); //Erscheint im Clientfenster
 });
@@ -9,6 +9,7 @@ socket.addEventListener("open", (event) => {
 function messageToServer() {
   let clientChat = document.getElementById("usermsg").value;
   //socket.send(clientChat);
+  //An den websocketserver senden, websocket kennt keinen Kanal darum type verwendet
   socket.send(JSON.stringify({ type: 'message', value: clientChat }));
   console.log(clientChat);
 }
@@ -32,6 +33,7 @@ function changeUserName() {
 socket.addEventListener("message", (event) => {
   console.log(`Received message: ${event.data}`);
   messageChatbox(event.data);  //im Index.html in die messagebox
+  //receiveUser(event.data); //Funktionsaufruf 
 });
 
 function messageChatbox(message){
@@ -41,7 +43,12 @@ function messageChatbox(message){
   messageHistory.appendChild(newMessage);
 }
 
-
+// function receiveUser(serializedUserObject) {
+//   const userObject = JSON.parse(serializedUserObject);
+//   const userElement = document.createElement('p');
+//   userElement.innerText = userObject.users;
+//   const users = document.getElementById('userbox')
+// }
 
 //Schliesst die Websocket Verbindung
 socket.addEventListener("close", (event) => {

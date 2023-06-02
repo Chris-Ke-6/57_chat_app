@@ -21,9 +21,14 @@ const initializeWebsocketServer = async (server) => {
   await publisher.connect();
 
   const websocketServer = new WebSocket.Server({ server });
-  websocketServer.on("connection", onConnection);
+  websocketServer.on("connection", onConnection);  //Falls eine neuen Verbindung vorhanden dann Funktion onConnection ausführen.
   websocketServer.on("error", console.error);
-  await subscriber.subscribe("newMessage", onRedisMessage); //Channel newMessage dann Funktion onRedisMessage ausführen
+
+  //Redis instruieren dass Mitteilungen aus dem Kanal "newMessage", "users" übernommen werden und dann Funktion onRedisMessage/onRedisUsers ausführen.
+  await subscriber.subscribe("newMessage", onRedisMessage);
+  //await subscriber.subscribe("users", onRedisUsers);
+
+  //Redis instruieren dass eine Mittteilung im Kanal "newMessage" publiziert wird.
   await publisher.publish("newMessage", "Hello from Redis!");
 };
 
@@ -32,7 +37,7 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
   console.log("New websocket connection");
   ws.on("close", () => onClose(ws));
   ws.send("Hello Client!");
-  ws.on('message', (message)=> {
+  ws.on('message', (message)=> { //Kanal ist message, Textinhalt ist (message)
     const parseMessage = JSON.parse(message);
     const type = parseMessage.type;
     const value = parseMessage.value;
@@ -53,9 +58,8 @@ const onConnection = (ws) => {    //funct welche aufgrund vom Client ausgeführt
 // If a new message is received, the onClientMessage function is called
 const onClientMessage = (ws, message) => {
   console.log("Message on Websocket from Client received: " + message);
-  //ws.send("message",(message) => onRedisMessage(message)); //08:30
-  publisher.publish("newMessage", message);
-  //TODO!!!!!! Send the message to the redis channel
+  //ws.send("message",(message) => onRedisMessage(message));
+  publisher.publish("newMessage", message); //message publizieren in den Redis Kanal "newMessage"
 };
 
 // If a new userName is received, the onClientUsername function is called
@@ -63,6 +67,7 @@ const onClientUsername = (ws, userName) => {
   console.log("Username on Websocket from Client received: " + userName);
   clients.push({ws,userName});
   console.log(clients);
+  //publisher.publish("users",clients); //Clients publizieren in den Redis Kanal "users"
 };
 
 // If a Change of Username is received, the onClientUserchange is called
@@ -72,16 +77,22 @@ const onClientUserchange = (ws, userNames) => {
   //
 };
 
-
 // If a new message from the redis channel is received, the onRedisMessage function is called
 const onRedisMessage = (message) => {
   console.log("Message by redis received: " + message);
   clients.forEach((client) =>{
     client.ws.send(message);
-
   }); 
   //TODO!!!!!! Send the message to all connected clients
 };
+
+// // If a new user from the redis channel is received, the onRedisMessage function is called
+// const onRedisUsers = (clients) => {
+//   console.log("Message by redis received: " + clients);
+//   clients.forEach((client) =>{
+//     client.ws.send(clients);
+//   }); 
+// }
 
 // If a connection is closed, the onClose function is called
 const onClose = (ws) => {
