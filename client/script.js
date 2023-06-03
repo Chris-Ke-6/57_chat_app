@@ -8,7 +8,7 @@ socket.addEventListener("open", (event) => {
 
 function messageToServer() {
   let clientChat = document.getElementById("usermsg").value;
-  //socket.send(clientChat);
+
   //An den websocketserver senden, websocket kennt keinen Kanal darum type verwendet
   socket.send(JSON.stringify({ type: 'message', value: clientChat }));
   console.log(clientChat);
@@ -16,7 +16,6 @@ function messageToServer() {
 
 function userToServer() {
   let userName = document.getElementById("userInputName").value;
-  //socket.send(userName);
   socket.send(JSON.stringify({ type: 'user', value: userName }));
   console.log(userName);
 }
@@ -24,7 +23,6 @@ function userToServer() {
 function changeUserName() {
   let userNameOld = document.getElementById("username_old").value;
   let userNameNew = document.getElementById("username_new").value;
-  //socket.send(userName);
   socket.send(JSON.stringify({ type: 'userchange', value: {userNameOld, userNameNew} }));
   console.log(userNameOld,userNameNew);
 }
@@ -32,17 +30,17 @@ function changeUserName() {
 //Empfängt Nachrichten vom Server auf Kanal message
 socket.addEventListener("message", (event) => {
   console.log(`Received message: ${event.data}`);
+  console.log(event.data);
   const parseData = JSON.parse(event.data);
   console.log(parseData.type);
+  console.log(parseData.value);
 
   if (parseData.type === 'userList') {
+    //receiveUser(event.data.value);
     receiveUser(parseData.value);
   } else {
     messageChatbox(parseData.value);
   }
-
-  //messageChatbox(event.data);  //im Index.html in die messagebox
-  //receiveUser(event.data); //Funktionsaufruf 
 });
 
 function messageChatbox(message){
@@ -52,11 +50,16 @@ function messageChatbox(message){
   messageHistory.appendChild(newMessage);
 }
 
-function receiveUser(serializedUserObject) {
-  const userObject = JSON.parse(serializedUserObject);
-  const userElement = document.createElement('p');
-  userElement.innerText = userObject.users;
-  const users = document.getElementById('userbox')
+function receiveUser(userList) {
+  const userListArray = JSON.parse(userList);
+    const userbox = document.getElementById('userbox')
+  userbox.innerHTML ='';
+
+  userListArray.forEach(user => {
+    const userElement = document.createElement('p'); 
+    userElement.textContent = user.userName;
+    userbox.appendChild(userElement) 
+  });  
 }
 
 //Schliesst die Websocket Verbindung
