@@ -29,10 +29,19 @@ function changeUserName() {
   console.log(userNameOld,userNameNew);
 }
 
-//Empfängt Nachrichten vom Server
+//Empfängt Nachrichten vom Server auf Kanal message
 socket.addEventListener("message", (event) => {
   console.log(`Received message: ${event.data}`);
-  messageChatbox(event.data);  //im Index.html in die messagebox
+  const parseData = JSON.parse(event.data);
+  console.log(parseData.type);
+
+  if (parseData.type === 'userList') {
+    receiveUser(parseData.value);
+  } else {
+    messageChatbox(parseData.value);
+  }
+
+  //messageChatbox(event.data);  //im Index.html in die messagebox
   //receiveUser(event.data); //Funktionsaufruf 
 });
 
@@ -43,12 +52,12 @@ function messageChatbox(message){
   messageHistory.appendChild(newMessage);
 }
 
-// function receiveUser(serializedUserObject) {
-//   const userObject = JSON.parse(serializedUserObject);
-//   const userElement = document.createElement('p');
-//   userElement.innerText = userObject.users;
-//   const users = document.getElementById('userbox')
-// }
+function receiveUser(serializedUserObject) {
+  const userObject = JSON.parse(serializedUserObject);
+  const userElement = document.createElement('p');
+  userElement.innerText = userObject.users;
+  const users = document.getElementById('userbox')
+}
 
 //Schliesst die Websocket Verbindung
 socket.addEventListener("close", (event) => {
