@@ -20,8 +20,10 @@ function userToServer() {
     alert('Bitte Benutzername mit mind. 2 Buchstaben eingeben');
     //Abbruch damit Code nicht weiter geht
   } else {
+    document.getElementById("username_old").value = userName;
     socket.send(JSON.stringify({ type: 'user', value: userName }));
     console.log(userName);
+    document.getElementById("userInputName").value = "";
   }
 }
 
@@ -30,6 +32,8 @@ function changeUserName() {
   let userNameNew = document.getElementById("username_new").value;
   socket.send(JSON.stringify({ type: 'userchange', value: {userNameOld, userNameNew} }));
   console.log(userNameOld,userNameNew);
+  document.getElementById("username_old").value = userNameNew;
+  document.getElementById("username_new").value = "";
 }
 
 //Empfängt Nachrichten vom Server
@@ -58,7 +62,7 @@ function messageChatbox(message){
 
 function receiveUser(userList) {
   const userListArray = JSON.parse(userList);
-    const userbox = document.getElementById('userbox')
+  const userbox = document.getElementById('userbox')
   userbox.innerHTML ='';
 
   userListArray.forEach(user => {

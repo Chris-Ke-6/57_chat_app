@@ -36,7 +36,7 @@ const initializeWebsocketServer = async (server) => {
 const onConnection = (ws) => {              //funct welche aufgrund vom Client ausgeführt wird
   console.log("New websocket connection");
   ws.on("close", () => onClose(ws));
-  ws.send(JSON.stringify({ type: 'message', value: "Hello Client!"}));
+  ws.send(JSON.stringify({ type: 'message', value: "Hallo Nutzer, immmer zuerst anmelden, dann chaten!"}));
   ws.on('message', (message)=> {              //Kanal ist message, Textinhalt ist (message)
     const parseMessage = JSON.parse(message); //Deserialisieren und 
     const type = parseMessage.type;           // Variable type zuweisen
@@ -64,6 +64,8 @@ const onClientMessage = (ws, message) => {
 // If a new userName is received, the onClientUsername function is called
 const onClientUsername = (ws, userName) => {
   console.log("Username on Websocket from Client received: ", userName);
+
+  //Prüfung ob Username bereits vorhanden
   const index = clients.findIndex(client => client.userName === userName);
   console.log(index);
   if (index !== -1){
