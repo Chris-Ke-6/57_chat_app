@@ -76,8 +76,14 @@ const onClientUsername = (ws, userName) => {
 // If a Change of Username is received, the onClientUserchange is called
 const onClientUserchange = (ws, userNames) => {
   console.log("UserChange on Websocket from Client received");
-  console.log(JSON.stringify(userNames.userNameOld + userNames.userNameNew));
-  //
+  const index = clients.findIndex(client => client.userName === userNames.userNameOld);
+  console.log(index);
+  if (index !== -1){
+    clients[index].userName = userNames.userNameNew;
+    console.log("triggered");
+  };
+  const userList = clients.map((client) => ({ userName: client.userName }));
+  publisher.publish("users", JSON.stringify(userList));
 };
 
 // If a new message from the redis channel is received, the onRedisMessage function is called
