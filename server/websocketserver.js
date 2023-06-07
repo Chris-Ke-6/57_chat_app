@@ -58,6 +58,7 @@ const onConnection = (ws) => {              //funct welche aufgrund vom Client a
 // If a new message is received, the onClientMessage function is called
 const onClientMessage = (ws, message) => {
   console.log("Message on Websocket from Client received: ", message);
+  //const message = ({ws.username, (message)});
   publisher.publish("newMessage", message);   //Publizieren in den Redis Kanal "newMessage"
 };
 
@@ -67,7 +68,7 @@ const onClientUsername = (ws, userName) => {
 
   //Prüfung ob Username bereits vorhanden
   const index = clients.findIndex(client => client.userName === userName);
-  console.log(index);
+  //console.log(index);
   if (index !== -1){
     //Fehlemeldung Name bereits vorhanden
     ws.send(JSON.stringify({ type: 'fault', value: "Benutzername ungültig"}));
@@ -82,7 +83,7 @@ const onClientUsername = (ws, userName) => {
 const onClientUserchange = (ws, userNames) => {
   console.log("UserChange on Websocket from Client received");
   const index = clients.findIndex(client => client.userName === userNames.userNameOld);
-  console.log(index);
+  //console.log(index);
   if (index !== -1){
     clients[index].userName = userNames.userNameNew;
   };

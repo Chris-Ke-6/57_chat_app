@@ -12,6 +12,7 @@ function messageToServer() {
   //An den websocketserver senden, websocket kennt keinen Kanal darum type verwendet
   socket.send(JSON.stringify({ type: 'message', value: clientChat }));
   console.log(clientChat);
+  document.getElementById("usermsg").value ="";
 }
 
 function userToServer() {
