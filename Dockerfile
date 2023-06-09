@@ -14,5 +14,4 @@ RUN npm install
 COPY . .
 
 # Start the server when the container starts
-# npm start
 CMD ["npm", "run", "dev" ]

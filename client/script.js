@@ -1,5 +1,5 @@
-//Startet eine Instanz auf dem Localhost 3000
-const socket = new WebSocket("ws://localhost:3000");  //Erstellt eine Verbindung mit den Server -> onConnection
+//Startet eine Instanz auf dem Localhost 9000
+const socket = new WebSocket("ws://localhost:9000");  //Erstellt eine Verbindung mit den Server -> onConnection
 
 //Öffnet die Sendet Daten zum Server 
 socket.addEventListener("open", (event) => {
@@ -7,7 +7,9 @@ socket.addEventListener("open", (event) => {
 });
 
 function messageToServer() {
-  let clientChat = document.getElementById("usermsg").value;
+  let clientText = document.getElementById("usermsg").value;
+  let clientName = document.getElementById("username_old").value;
+  let clientChat = clientName + " : " + clientText; 
 
   //An den websocketserver senden, websocket kennt keinen Kanal darum type verwendet
   socket.send(JSON.stringify({ type: 'message', value: clientChat }));

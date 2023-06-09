@@ -7,11 +7,11 @@ services:
     ports:
       - 6379:6379
 
-  chat_app:
-    image: dokerstuff/57_chat_app 
-    ports:
-      - 9000:3000
-    environment:
-      - REDIS_HOST=redis
-    depends_on:
-      - redis
+  # chat_app:
+  #   image: dokerstuff/57_chat_app 
+  #   ports:
+  #     - 9000:3000
+  #   environment:
+  #     - REDIS_HOST=redis
+  #   depends_on:
+  #     - redis

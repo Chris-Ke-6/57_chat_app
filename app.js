@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
   // Initialize the REST api
   initializeAPI(app);
   //start the web server
-  const serverPort = process.env.PORT || 3000;
+  const serverPort = process.env.PORT || 9000;
   server.listen(serverPort, () => {
     console.log(
       `Express Server started on port ${serverPort} as '${env}' Environment`
